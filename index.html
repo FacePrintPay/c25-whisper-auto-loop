@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>c25-whisper-auto-loop</title>
+<style>body{background:#0a0a1a;color:#e0e0ff;font-family:monospace;padding:20px;max-width:900px;margin:0 auto}h1{color:#7af}.badge{background:#1a3a1a;border:1px solid #4f4;padding:3px 10px;border-radius:20px;font-size:.8em;color:#4f4}pre{background:#111128;border:1px solid #333;border-radius:8px;padding:20px;overflow-x:auto;margin-top:20px}</style>
+</head><body><span class="badge">✅ CONFIRMED RAN</span><h1>c25-whisper-auto-loop</h1><p style="color:#888">Lines: 36 | Deps: git  | C25 FacePrintPay</p><pre>#!/bin/bash
+echo "🔁 Running WhisperSync Auto-Loop..."
+# Define timestamp
+timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+# Check for voice input file (e.g., via speech-to-text system)
+voice_input="text.txt"
+# Check if text.txt exists
+if [ -f "$voice_input" ]; then
+    input_content=$(cat "$voice_input")
+    echo "$timestamp - [Voice/Text] $input_content" &gt;&gt; ./logs/whispersync.log
+    echo "🧠 Entry added from $voice_input"
+else
+    echo "$timestamp - [System] No voice or text input detected." &gt;&gt; ./logs/whispersync.log
+    echo "⚠️ No input file found. Logged default system note."
+fi
+# Optional: Auto-commit to Git if network available
+if ping -q -c 1 -W 1 github.com &gt; /dev/null; then
+    bash ./git_autocommit.sh
+else
+    echo "🌐 Git not pushed — no internet detected."</pre></body></html>
